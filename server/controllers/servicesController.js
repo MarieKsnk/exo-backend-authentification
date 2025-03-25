@@ -9,7 +9,7 @@ export const getAllServices = async (req, res) => {
     return res.status(200).json(services);
   } catch (err) {
     console.log(err);
-    return res.status(500).json(`Internal server error`, err);
+    return res.status(500).json("Internal server error");
   }
 };
 
@@ -17,8 +17,9 @@ export const createService = async (req, res) => {
   try {
     const newService = await Service.create(req.body);
     console.log(newService);
+    return res.status(201).json(newService);
   } catch (err) {
     console.log(err);
-    return res.status(500).json(`Internal server error`, err);
+    return res.status(500).json("Internal server error");
   }
 };
