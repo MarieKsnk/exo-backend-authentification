@@ -10,8 +10,12 @@ export const AuthController = ({children}) => {
 
     const handleLogin = async (e, email, password) => {
         e.preventDefault()
+        console.log('handleLogin appele avec :', email, password)
+
         try{
             const response = await axios.post('http://localhost:8000/api/login', {email, password})
+            console.log('api response :', response)
+
             if(response.status === 200){
                 localStorage.setItem('token', response.data.token)
                 setIsAuthenticated(true)
@@ -21,13 +25,13 @@ export const AuthController = ({children}) => {
 
         } 
         catch(err){
-            console.log(err)
+            console.error("Erreur dans le handleLogin:", err)
             alert('Echec connexion')
         }
     }
 
     return(
-        <AuthContext.Provider value={[isAuthenticated, setIsAuthenticated, handleLogin]}>
+        <AuthContext.Provider value={[isAuthenticated, handleLogin]}>
             {children}
         </AuthContext.Provider>
     )

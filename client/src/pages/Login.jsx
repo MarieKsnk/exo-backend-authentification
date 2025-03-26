@@ -3,9 +3,18 @@ import { AuthContext } from "../context/authContext"
 
 const Login = () => {
 
-    const {handleLogin} = useContext(AuthContext)
+    const [isAuthentificated, handleLogin] = useContext(AuthContext)
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    console.log('Login composant TEST')
+
+    const submitHandler = (e) => {
+        console.log("submitHandler triggered !")
+        handleLogin(e, email, password)
+      }
+    
 
 
     return(
@@ -16,7 +25,7 @@ const Login = () => {
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={(e) => handleLogin(e, email, password)} class="space-y-6">
+          <form onSubmit={submitHandler} class="space-y-6">
 
             <div>
               <label for="email" class="block text-sm/6 font-medium text-gray-900">Adresse email</label>

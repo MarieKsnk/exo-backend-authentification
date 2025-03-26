@@ -23,7 +23,7 @@ export const createUser = async (req, res) => {
       password: hashedPassword,
     });
 
-    newUser.save();
+    await newUser.save();
     return res.status(201).json(`Welcome to our event manager ${first_name}`);
   } catch (err) {
     console.log(err);
@@ -48,7 +48,9 @@ export const loginUser = async (req, res) => {
 
     const token = await jwt.sign({ id: user._id }, JWT_SECRET);
 
-    return res.status(200).json(token);
+    return res
+      .status(200)
+      .json({ token, message: `Welcome ${user.first_name}` });
   } catch (err) {
     console.log(err);
     return res.status(500).json(`Internal server error`, err);

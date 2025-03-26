@@ -11,11 +11,11 @@ const Register = () => {
 
   //changer les noms prenom -> first name dans le formulaire
 
-  const handleRegistration = async () => {
+  const handleRegistration = async (e) => {
     e.preventDefault()
     console.log('Submit')
     try{
-      const newUser = await axios.post('http://localhost8000/api/register', {firstName, lastName, email, password})
+      const newUser = await axios.post('http://localhost:8000/api/register', {first_name: firstName, last_name: lastName, email, password})
       if(newUser.status === 201){
         alert(newUser.data)
         navigate('/')
