@@ -4,9 +4,15 @@ import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router'
 import MyRouter from './MyRouter.jsx'
+import { ServicesController } from './context/servicesContext.jsx'
+import { AuthController } from './context/authContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <MyRouter />
+    <ServicesController>
+      <AuthController>
+        <MyRouter />
+      </AuthController>
+    </ServicesController>
   </BrowserRouter>,
 )
