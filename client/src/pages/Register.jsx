@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from 'axios'
-import {useNavigate} from 'react-router'
+import {useNavigate} from 'react-router-dom'
 
 const Register = () => {
   let navigate = useNavigate()
@@ -35,11 +35,11 @@ const Register = () => {
         <>
         <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Connexion</h2>
+          <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Inscription</h2>
         </div>
 
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form onSubmit={handleRegistration} class="space-y-6" action="#" method="POST">
+          <form onSubmit={handleRegistration} class="space-y-6">
 
             <div>
                 <label for="nom" class="block text-sm/6 font-medium text-gray-900">Nom</label>
@@ -84,8 +84,8 @@ const Register = () => {
           </form>
       
           <p class="mt-10 text-center text-sm/6 text-gray-500">
-            Pas encore de compte ?
-            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"> Inscrivez-vous</a>
+            Vous avez deja un compte ?
+            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"> Connectezvous</a>
           </p>
         </div>
       </div>
