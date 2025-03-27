@@ -1,10 +1,28 @@
 import './App.css'
 import { useContext } from 'react'
 import { ServicesContext } from './context/servicesContext'
+import axios from 'axios'
 
 function App() {
 
   const [services, setServices] = useContext(ServicesContext)
+
+  const fetchAPI = async () => {
+    try{
+      const response = await axios.get('http://localhost:8000', {
+
+        headers : {
+          'Authorization' : `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      console.log(response)
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+
+  fetchAPI()
 
   return (
     <>

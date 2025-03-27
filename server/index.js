@@ -4,6 +4,7 @@ import connectDB from "./database/client.js";
 import authRouter from "./routes/auth.js";
 import eventRouter from "./routes/events.js";
 import servicesRouter from "./routes/services.js";
+import userRouter from "./routes/users.js";
 import cors from "cors";
 const PORT = process.env.PORT || 8000;
 
