@@ -21,7 +21,7 @@ export const createUser = async (req, res) => {
       last_name,
       email,
       password: hashedPassword,
-      image: "/public/image/" + req.file.filename,
+      image: "/public/images/" + req.file.filename,
     });
 
     await newUser.save();

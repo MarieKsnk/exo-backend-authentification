@@ -3,12 +3,10 @@ import { AuthContext } from "../context/authContext"
 
 const Login = () => {
 
-    const [isAuthentificated, handleLogin] = useContext(AuthContext)
+    const {handleLogin} = useContext(AuthContext)
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-
-    console.log('Login composant TEST')
 
     const submitHandler = (e) => {
         console.log("submitHandler triggered !")

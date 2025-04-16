@@ -1,27 +1,27 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Profile = () => {
+const AllUsers = () => {
+
   const navigate = useNavigate();
-
   const {isAuthenticated, tokenStorage, handleLogin, handleLogout} = useContext(AuthContext);
   
-  const [userProfile, setUserProfile] = useState(null);
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  const fetchUserProfile = async () => {
-    console.log("FONCTION DES INFOS USER");
+  const fetchAllUsers = async () => {
+
     try {
-      const response = await axios.get("http://localhost:8000/api/profile", {
+      const response = await axios.get("http://localhost:8000/api/users", {
         headers: {
           "Authorization": `Bearer ${tokenStorage}`
         }
       });
       if (response.status === 200) {
-        setUserProfile(response.data);
+        setUsers(response.data);
       }
     } catch (err) {
       console.error(err);
@@ -35,25 +35,26 @@ const Profile = () => {
     if (!isAuthenticated) {
       navigate("/login");
     } else if (tokenStorage) {
-      fetchUserProfile();
+      fetchAllUsers();
     } else {
       setLoading(false);
     }
   }, [isAuthenticated, tokenStorage, navigate]);
   
   if (loading) return <div>Chargement...</div>;
-  if (error) return <div>Erreur : {error.message || "Erreur lors du chargement du profil"}</div>;
+  if (error) return <div>Erreur : {error.message || "Erreur lors du chargement des utilisateurs"}</div>;
   
   return (
         <>
-        {!loading && userProfile && (
-            <>
-            <h1>Hello, my name is {userProfile.first_name}</h1>
-            <img src={`http://localhost:8000${userProfile.image}`} />
-            </>
-        )}
+        {!loading && users && users.map(user => {
+            return (
+                <>
+                <h1>{user.first_name}</h1>
+                </>
+            )
+        })}
         </>
   );
 };
 
-export default Profile;
+export default AllUsers;

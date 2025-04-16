@@ -17,9 +17,9 @@ app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("images", express.static("public/images"));
+app.use("/images", express.static("public/images"));
 
-app.use("/api", authRouter, eventRouter, servicesRouter);
+app.use("/api", authRouter, eventRouter, servicesRouter, userRouter);
 
 app.get("/", (req, res) => {
   res.send(`Welcome to my event API`);

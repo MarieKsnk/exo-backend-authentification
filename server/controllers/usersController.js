@@ -1,4 +1,4 @@
-import User from "../models/User";
+import User from "../models/User.js";
 
 export const getUserProfile = async (req, res) => {
   console.log(req.user.id);
@@ -8,8 +8,21 @@ export const getUserProfile = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "user not found" });
     }
-    return res.status(200).json(userById);
+    return res.status(200).json(user);
   } catch (err) {
-    return res.status(500).json("Internal server error", err);
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: err.message });
+  }
+};
+
+export const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("first_name image");
+    return res.status(200).json(users);
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: err.message });
   }
 };
