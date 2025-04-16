@@ -15,7 +15,7 @@ const Profile = () => {
   const fetchUserProfile = async () => {
     console.log("FONCTION DES INFOS USER");
     try {
-      const response = await axios.get("http://localhost:8000/api/profile", {
+      const response = await axios.get("http://localhost:8000/api/users/profile", {
         headers: {
           "Authorization": `Bearer ${tokenStorage}`
         }

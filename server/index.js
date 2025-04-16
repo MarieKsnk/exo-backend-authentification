@@ -19,7 +19,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/images", express.static("public/images"));
 
-app.use("/api", authRouter, eventRouter, servicesRouter, userRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/events", eventRouter);
+app.use("/api/services", servicesRouter);
+app.use("/api/users", userRouter);
 
 app.get("/", (req, res) => {
   res.send(`Welcome to my event API`);

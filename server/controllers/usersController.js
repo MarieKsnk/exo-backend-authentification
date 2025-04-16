@@ -26,3 +26,19 @@ export const getAllUsers = async (req, res) => {
       .json({ message: "Internal server error", error: err.message });
   }
 };
+
+export const getUserById = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select("first_name image");
+    if (!user) {
+      return res
+        .status(404)
+        .json({ message: "Erreur, utilisateur non trouvé" });
+    }
+    return res.status(200).json(user);
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ message: "Internal server error", error: err.message });
+  }
+};

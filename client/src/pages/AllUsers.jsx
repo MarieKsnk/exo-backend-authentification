@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 const AllUsers = () => {
 
   const navigate = useNavigate();
-  const {isAuthenticated, tokenStorage, handleLogin, handleLogout} = useContext(AuthContext);
+  const {isAuthenticated, tokenStorage} = useContext(AuthContext);
   
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -49,7 +49,9 @@ const AllUsers = () => {
         {!loading && users && users.map(user => {
             return (
                 <>
-                <h1>{user.first_name}</h1>
+                <h2 key={user._id} onClick={() => navigate(`/users/${user._id}`)} className="cursor-pointer text-indigo-600 hover:underline" >
+                    {user.first_name}
+                </h2>
                 </>
             )
         })}

@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import AllUsers from "./pages/AllUsers";
+import UserID from "./pages/UserID"
 
 
 const MyRouter = () => {
@@ -17,6 +18,7 @@ const MyRouter = () => {
             <Route path="/inscription" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/users" element={<AllUsers />} />
+            <Route path="/users/:id" element={<UserID />} />
             <Route path="*" element={<p>404 not found</p>} />
         </Routes>
         </>

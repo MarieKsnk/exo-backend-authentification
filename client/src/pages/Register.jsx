@@ -8,14 +8,22 @@ const Register = () => {
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [image, setImage] = useState(null)
 
   //changer les noms prenom -> first name dans le formulaire
 
   const handleRegistration = async (e) => {
     e.preventDefault()
-    console.log('Submit')
+    const formData = new FormData();
+    formData.append("first_name", firstName);
+    formData.append("last_name", lastName);
+    formData.append("email", email);
+    formData.append("password", password);
+    if(image) {
+      formData.append("image", image);
+    }
     try{
-      const newUser = await axios.post('http://localhost:8000/api/register', {first_name: firstName, last_name: lastName, email, password})
+      const newUser = await axios.post('http://localhost:8000/api/register', formData)
       if(newUser.status === 201){
         alert(newUser.data)
         navigate('/')
@@ -64,6 +72,14 @@ const Register = () => {
                 onChange={e => setEmail(e.target.value)}/>
               </div>
             </div>
+
+            <div>
+              <label for="email" class="block text-sm/6 font-medium text-gray-900">Photo</label>
+              <div class="mt-2">
+                <input type="file" name="image" required class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" 
+                onChange={e => setImage(e.target.files[0])}/>
+              </div>
+            </div>
       
             <div>
               <div class="flex items-center justify-between">
@@ -79,13 +95,13 @@ const Register = () => {
             </div>
       
             <div>
-              <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Je me connecte</button>
+              <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Je m'inscris</button>
             </div>
           </form>
       
           <p class="mt-10 text-center text-sm/6 text-gray-500">
             Vous avez deja un compte ?
-            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"> Connectezvous</a>
+            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"> Connectez-vous</a>
           </p>
         </div>
       </div>
